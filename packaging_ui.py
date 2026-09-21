@@ -77,8 +77,8 @@ def render_packaging(state):
     for item in PACKAGING_STOCKS:
         with st.container(border=True):
             left, right = st.columns([2, 5])
-            left.markdown(f"**{item['name']}**  
-{item['chain']}")
+            left.markdown(f"**{item['name']}**")
+            left.caption(item["chain"])
             right.write(item["focus"])
 
     st.caption("현재가는 KIS 계좌 조회값 또는 저장된 공식 시세 스냅샷을 사용합니다. 값이 없으면 임의로 채우지 않습니다.")
