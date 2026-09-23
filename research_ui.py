@@ -13,12 +13,16 @@ from chat_research import published, parse_bundle, trends, growth, request_text
 
 def render_research(store, state, sample_mode):
     theme()
-    market = st.columns(5)
+    st.markdown(
+        '<div class="px-topline"><span>PLANX · STOCK INTELLIGENCE</span>'
+        '<span>시장 데이터는 연결 상태를 확인하세요 · 종목별 조사일은 아래에 표시</span></div>',
+        unsafe_allow_html=True,
+    )
+    market = st.columns(5, gap='small')
     for col, label in zip(market, ('KOSPI', 'KOSDAQ', 'USD/KRW', 'WTI', 'GOLD')):
         with col:
-            card(label, '데이터 연결 필요', '시장 API 연결 후 표시')
-    st.caption('시장 수치를 임의로 표시하지 않습니다. 종목 자료는 각 카드의 기준일을 확인하세요.')
-    hero('내 투자의 현재를 한눈에', '관심 있는 기업을 담고, 판단에 필요한 변화만 확인하세요.', 'PLANX · STOCK RESEARCH')
+            card(label, '연결 대기', '시장 API 미연결')
+    hero('내 관심종목 퀀트 보드', '관심 있는 기업을 담고, 판단에 필요한 변화만 확인하세요.', '오늘의 투자판단')
     if sample_mode:
         st.info('둘러보기 중입니다. 개인 목록을 저장하려면 먼저 대시보드 비밀번호를 설정하세요.')
     else:
@@ -88,6 +92,24 @@ def render_research(store, state, sample_mode):
         rows.append(row);details[key]=(stock, r, trend, frame)
     st.caption('시장  ›  산업  ›  기업  ›  투자판단')
     overview(details, st.session_state.get('account_snapshot'))
+    selected_preview = next(((item, research_report, price_frame)
+                             for item, research_report, _, price_frame in details.values()
+                             if research_report and price_frame is not None and not price_frame.empty), None)
+    if selected_preview:
+        preview_stock, preview_report, preview_frame = selected_preview
+        with st.container(border=True):
+            st.subheader(preview_stock['name'] + ' · 가격 추이')
+            st.caption('수정종가 · ' + str(preview_frame['date'].iloc[0]) + ' ~ '
+                       + str(preview_frame['date'].iloc[-1]) + ' · 실시간 시세가 아닙니다.')
+            st.line_chart(preview_frame.set_index('date')['close'], color='#177a53',
+                          use_container_width=True)
+            if preview_report.get('prices', {}).get('source'):
+                st.link_button('가격 자료 원문', preview_report['prices']['source'])
+    else:
+        with st.container(border=True):
+            st.subheader('관심종목 가격 추이')
+            st.info('공식 가격 자료가 수집된 종목을 추가하면 추이가 표시됩니다.')
+
     with st.expander('전체 지표 비교'):
         st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
     st.markdown('### 기업 하나를 깊게 보기')

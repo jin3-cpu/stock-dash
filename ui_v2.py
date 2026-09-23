@@ -78,6 +78,29 @@ h1 { font-weight:800; } p,li { line-height:1.6; }
 .planx-status-bad { color:#aa4242; background:#fff0ef; border-color:#efcdca; }
 hr { border-color:var(--line) !important; }
 @media(max-width:900px) { .block-container { padding:1rem 1rem 3rem; } .planx-hero h1 { font-size:27px; } }
+
+/* Dashboard layout inspired by the approved cream and gold mockup. */
+.block-container { max-width:1800px; padding:1.1rem 1.5rem 4rem; }
+section[data-testid="stSidebar"] { min-width:235px; }
+[data-testid="stSidebar"] .planx-brand { margin:10px 0 24px; padding-bottom:22px; }
+.planx-brand-title { font-size:39px; font-weight:700; }
+.planx-brand-sub { letter-spacing:.26em; }
+.px-topline { display:flex; justify-content:space-between; align-items:center;
+  gap:16px; border-bottom:1px solid var(--line); padding:5px 0 16px; margin-bottom:16px;
+  color:#866b41; font-size:11px; font-weight:700; letter-spacing:.08em; }
+.px-topline span:last-child { color:var(--muted); font-weight:500; letter-spacing:0; }
+.planx-hero { padding:21px 0 17px; }
+.planx-hero h1 { font-size:31px; font-weight:800; }
+.planx-card { min-height:94px; padding:14px 16px; }
+.planx-card-value { font-family:Georgia,Pretendard,"Noto Sans KR",serif; font-size:20px; }
+[data-testid="stMetric"] { min-height:112px; padding:16px 18px; }
+[data-testid="stVerticalBlockBorderWrapper"] { padding:3px; }
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label { margin-bottom:7px; }
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked) { color:#7c5a20; }
+@media(max-width:900px) {
+  .block-container { padding:1rem 1rem 3rem; }
+  .px-topline { flex-direction:column; align-items:flex-start; }
+}
 </style>
 """,
         unsafe_allow_html=True,
