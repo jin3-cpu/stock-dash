@@ -25,18 +25,20 @@ def draw(chart):
 def overview(details, snapshot):
     reports = [r for _, r, _, _ in details.values() if r]
     positions = (snapshot or {}).get('positions', [])
-    a,b,c = st.columns(3)
+    a,b,c,d = st.columns(4)
     if positions:
         value = sum(float(p['value']) for p in positions)
         pnl = sum(float(p['pnl']) for p in positions)
         a.metric('국내주식 평가금액', f'{value:,.0f}원')
         b.metric('평가손익', f'{pnl:+,.0f}원', f'{pnl/(value-pnl)*100:+.1f}%' if value-pnl>0 else None)
         c.metric('보유 / 관심종목', f'{len(positions)} / {len(details)}')
+        d.metric('퀀트 점수', '평가 보류', help='검증 가능한 5축 점수 기준이 아직 연결되지 않았습니다.')
         st.caption('계좌 조회 시점 기준 · 예수금 제외 · ' + str(snapshot.get('fetched','')))
     else:
         a.metric('내 관심종목', f'{len(details)}개')
         b.metric('조사 자료 보유', f'{len(reports)}개')
         c.metric('추가 조사 필요', f'{len(details)-len(reports)}개')
+        d.metric('퀀트 점수', '평가 보류', help='검증 가능한 5축 점수 기준이 아직 연결되지 않았습니다.')
     left,right=st.columns([1,1.5],gap='large')
     with left, st.container(border=True):
         st.subheader('어디에 투자하고 있나요?')
