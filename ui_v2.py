@@ -101,6 +101,14 @@ section[data-testid="stSidebar"] { min-width:235px; }
   .block-container { padding:1rem 1rem 3rem; }
   .px-topline { flex-direction:column; align-items:flex-start; }
 }
+
+.px-judgement { height:155px; background:#fff; border:1px solid var(--line);
+ border-radius:11px; padding:15px; overflow:hidden; }
+.px-judgement-label { font-size:12px; font-weight:750; color:#6c604f; margin-bottom:13px; }
+.px-judgement strong { color:var(--text); font-size:17px; letter-spacing:-.025em; }
+.px-judgement p { color:var(--muted); font-size:11px; line-height:1.55; margin-top:14px; }
+.px-gold { border-top:3px solid #ae843c; } .px-slate { border-top:3px solid #9da9b9; }
+.px-green { border-top:3px solid #177a53; } .px-blue { border-top:3px solid #387bd1; }
 </style>
 """,
         unsafe_allow_html=True,
