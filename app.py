@@ -237,9 +237,9 @@ if latest:
 if st.session_state.get("force_nav"):
     st.session_state.nav_choice = st.session_state.pop("force_nav")
 
-NAV_ITEMS = ["내 종목", "계좌 연결", "후공정 · HBM", "교육자료", "설정"]
-legacy = {"통합 분석":"내 종목", "홈":"내 종목", "AI 인사이트":"내 종목", "관심 종목":"내 종목", "포트폴리오":"계좌 연결"}
-current = st.session_state.get("nav_choice", "내 종목")
+NAV_ITEMS = ["오늘의 투자판단", "계좌 연결", "후공정 · HBM", "교육자료", "설정"]
+legacy = {"내 종목":"오늘의 투자판단", "통합 분석":"오늘의 투자판단", "홈":"오늘의 투자판단", "AI 인사이트":"오늘의 투자판단", "관심 종목":"오늘의 투자판단", "포트폴리오":"계좌 연결"}
+current = st.session_state.get("nav_choice", "오늘의 투자판단")
 if current not in NAV_ITEMS:
     st.session_state.nav_choice = legacy.get(current, "설정")
     if current not in legacy:
@@ -718,7 +718,7 @@ def render_placeholder(title, subtitle, required):
                 st.caption(cap)
 
 
-if nav == "내 종목":
+if nav == "오늘의 투자판단":
     render_research(store, state, sample_mode)
 elif nav == "계좌 연결":
     render_portfolio(store, sample_mode)
@@ -734,7 +734,7 @@ else:
     if previous not in options: st.session_state.advanced_page = "사용 안내"
     page = st.selectbox("필요한 도구", options, key="advanced_page")
     if page == "사용 안내":
-        st.markdown("**1. 내 종목**에서 기업 이름을 추가하세요.\n\n**2. 조사 요청**을 열어 요청문을 이 채팅에 보내세요.\n\n**3. 종목을 선택**해 핵심 요약과 자세한 근거를 확인하세요.")
+        st.markdown("**1. 오늘의 투자판단**에서 기업 이름을 추가하세요.\n\n**2. 조사 요청**을 열어 요청문을 이 채팅에 보내세요.\n\n**3. 종목을 선택**해 핵심 요약과 자세한 근거를 확인하세요.")
         st.link_button("상세 사용 안내", "https://github.com/planxs-ai/stock-dash/blob/main/CHAT-RESEARCH.md")
     elif page == "데이터 연결 관리": render_sources()
     elif page == "종목 분석": render_stock()
