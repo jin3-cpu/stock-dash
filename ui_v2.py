@@ -22,225 +22,62 @@ def apply_theme():
         """
 <style>
 :root {
-  --bg: #F7F9FC;
-  --surface: #FFFFFF;
-  --surface-soft: #F9FBFF;
-  --line: #E6EAF0;
-  --line-strong: #D8DEE8;
-  --text: #0F172A;
-  --muted: #64748B;
-  --blue: #2563EB;
-  --blue-soft: #EFF6FF;
-  --green: #059669;
-  --red: #DC2626;
+  --bg:#fffdfa; --surface:#ffffff; --sidebar:#fcf8f0;
+  --line:#e8ddce; --text:#352d25; --muted:#788394;
+  --gold:#ae843c; --gold-soft:#f4ead7; --green:#177a53; --red:#c34b4b;
 }
-html, body, [class*="css"] {
-  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
-}
-.stApp {
-  background: var(--bg);
-  color: var(--text);
-}
-.block-container {
-  max-width: 1480px;
-  padding-top: 1.4rem;
-  padding-bottom: 4rem;
-}
-header[data-testid="stHeader"] {
-  background: rgba(247,249,252,.88);
-  backdrop-filter: blur(12px);
-}
-section[data-testid="stSidebar"] {
-  background: #FFFFFF;
-  border-right: 1px solid var(--line);
-}
-section[data-testid="stSidebar"] > div {
-  padding-top: .9rem;
-}
-[data-testid="stSidebar"] .stRadio > label {
-  display: none;
-}
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] {
-  gap: .18rem;
-}
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {
-  border-radius: 12px;
-  padding: .45rem .55rem;
-  transition: all .15s ease;
-}
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover {
-  background: #F3F6FB;
-}
+html,body,[class*="css"] { font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",sans-serif; }
+.stApp { background:var(--bg); color:var(--text); }
+.block-container { max-width:1640px; padding:1.65rem 2rem 4rem; }
+header[data-testid="stHeader"] { background:rgba(255,253,250,.95); }
+section[data-testid="stSidebar"] { background:var(--sidebar); border-right:1px solid var(--line); }
+section[data-testid="stSidebar"] > div { padding-top:1.3rem; }
+[data-testid="stSidebar"] .stRadio > label { display:none; }
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] { gap:.3rem; }
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label { border-radius:8px; padding:.68rem .6rem; }
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover { background:#f7efe1; }
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked) {
-  background: #EAF2FF;
-  color: #1D4ED8;
-  font-weight: 700;
+  background:var(--gold-soft); box-shadow:inset 3px 0 var(--gold); font-weight:700;
 }
-h1, h2, h3, h4 {
-  color: var(--text);
-  letter-spacing: -.035em;
+h1,h2,h3,h4 { color:var(--text); letter-spacing:-.035em; }
+h1 { font-weight:800; } p,li { line-height:1.6; }
+[data-testid="stCaptionContainer"] { color:var(--muted); }
+[data-testid="stMetric"],[data-testid="stVerticalBlockBorderWrapper"] {
+  background:var(--surface); border:1px solid var(--line) !important;
+  border-radius:11px !important; box-shadow:none !important;
 }
-h1 { font-weight: 800; }
-h2, h3 { font-weight: 760; }
-p, li { line-height: 1.62; }
-[data-testid="stCaptionContainer"] {
-  color: var(--muted);
+[data-testid="stMetric"] { padding:13px 16px; }
+[data-testid="stMetricValue"] { color:var(--text); font-variant-numeric:tabular-nums; }
+.stButton > button,.stFormSubmitButton > button { border-radius:8px; min-height:2.6rem; font-weight:650; }
+.stButton > button[kind="primary"],.stFormSubmitButton > button[kind="primary"] {
+  background:var(--gold); border-color:var(--gold); color:#fff;
 }
-[data-testid="stMetric"] {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 16px 18px;
-  box-shadow: 0 8px 24px rgba(15,23,42,.035);
+.stTextInput input,.stTextArea textarea,.stSelectbox div[data-baseweb="select"] > div {
+  border-radius:8px !important;
 }
-[data-testid="stMetricLabel"] {
-  color: var(--muted);
-}
-[data-testid="stMetricValue"] {
-  color: var(--text);
-  font-weight: 750;
-}
-[data-testid="stVerticalBlockBorderWrapper"] {
-  border-color: var(--line) !important;
-  border-radius: 16px !important;
-  background: var(--surface);
-  box-shadow: 0 8px 24px rgba(15,23,42,.03);
-}
-.stButton > button, .stFormSubmitButton > button {
-  border-radius: 11px;
-  min-height: 2.7rem;
-  font-weight: 700;
-}
-.stButton > button[kind="primary"], .stFormSubmitButton > button[kind="primary"] {
-  background: var(--blue);
-  border-color: var(--blue);
-}
-.stTextInput input, .stTextArea textarea, .stSelectbox div[data-baseweb="select"] > div {
-  border-radius: 12px !important;
-}
-.stTabs [data-baseweb="tab-list"] {
-  gap: 8px;
-}
-.stTabs [data-baseweb="tab"] {
-  border-radius: 10px;
-  padding: 8px 12px;
-}
-.stDataFrame {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  overflow: hidden;
-}
-.planx-brand {
-  display:flex; align-items:center; gap:10px; margin: 2px 0 18px 0;
-}
-.planx-brand-mark {
-  width:32px; height:32px; border-radius:10px;
-  display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(145deg,#2563EB,#60A5FA);
-  color:white; font-size:18px; font-weight:800;
-}
-.planx-brand-title {
-  font-size:18px; line-height:1.15; font-weight:800; letter-spacing:-.03em;
-}
-.planx-brand-sub {
-  font-size:10px; color:#94A3B8; margin-top:2px;
-}
-.planx-hero {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F8FBFF 55%, #EFF6FF 100%);
-  border: 1px solid #E2E8F0;
-  border-radius: 22px;
-  padding: 28px 30px;
-  margin-bottom: 18px;
-  box-shadow: 0 14px 38px rgba(15,23,42,.045);
-}
-.planx-eyebrow {
-  color:#2563EB; font-size:12px; font-weight:800; letter-spacing:.08em;
-  text-transform:uppercase; margin-bottom:8px;
-}
-.planx-hero h1 {
-  margin:0; font-size:34px; line-height:1.18;
-}
-.planx-hero p {
-  margin:9px 0 0; color:#64748B; font-size:14px;
-}
-.planx-card {
-  background:#FFFFFF;
-  border:1px solid #E6EAF0;
-  border-radius:16px;
-  padding:17px 18px;
-  min-height:116px;
-  box-shadow:0 8px 24px rgba(15,23,42,.03);
-}
-.planx-card-title {
-  font-size:12px; color:#64748B; margin-bottom:8px; font-weight:700;
-}
-.planx-card-value {
-  font-size:22px; color:#0F172A; font-weight:800; letter-spacing:-.03em;
-}
-.planx-card-note {
-  margin-top:7px; font-size:11px; color:#94A3B8;
-}
-.planx-empty {
-  background: #FFFFFF;
-  border:1px dashed #CBD5E1;
-  border-radius:16px;
-  padding:22px;
-  color:#64748B;
-}
-.planx-source {
-  display:inline-flex; align-items:center; gap:5px;
-  color:#64748B; background:#F8FAFC; border:1px solid #E2E8F0;
-  padding:4px 8px; border-radius:999px; font-size:10px;
-}
-.planx-status-ok { color:#047857; background:#ECFDF5; border-color:#A7F3D0; }
-.planx-status-wait { color:#92400E; background:#FFFBEB; border-color:#FDE68A; }
-.planx-status-bad { color:#B91C1C; background:#FEF2F2; border-color:#FECACA; }
-hr { border-color:#E6EAF0 !important; }
-@media (max-width: 900px) {
-  .block-container { padding-left:1rem; padding-right:1rem; }
-  .planx-hero { padding:22px 20px; }
-  .planx-hero h1 { font-size:28px; }
-}
-/* Quiet, readable research workspace. */
-.block-container { max-width:1240px; padding-top:2rem; }
-.stApp { background:#f8f6f1; }
-section[data-testid="stSidebar"] { background:#eee7da; border-right:0; }
-section[data-testid="stSidebar"] p,
-section[data-testid="stSidebar"] label,
-section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] { color:#493e2f; }
-section[data-testid="stSidebar"] .planx-brand-title { color:#493e2f; font-size:22px; }
-section[data-testid="stSidebar"] .planx-brand-sub { color:#806e50; font-size:13px; }
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] { gap:10px; }
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label { padding:14px 12px; border-radius:8px; }
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover { background:#e7ddc9; }
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked) { background:#dfcea8; box-shadow:inset 3px 0 #ad873f; }
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked) p { color:#493e2f; }
-[data-testid="stSidebar"] .stButton button p { color:#1b2c45; }
-.planx-brand { margin:12px 0 36px; }
-.planx-brand-mark { background:#a17c36; border-radius:9px; width:38px; height:38px; }
-.planx-hero { background:transparent; border:0; border-radius:0; padding:0 0 18px; box-shadow:none; margin-bottom:6px; }
-.planx-hero h1 { font-size:36px; font-weight:750; }
-.planx-hero p { font-size:16px; color:#77674e; max-width:650px; }
-.planx-eyebrow { font-size:12px; color:#98763a; letter-spacing:.12em; }
-.planx-card { box-shadow:none; min-height:132px; border-radius:12px; padding:22px; border-top:3px solid #b1883c; }
-.planx-card-title { font-size:14px; font-weight:500; }
-.planx-card-value { font-size:28px; font-variant-numeric:tabular-nums; }
-.planx-card-note { font-size:13px; color:#5d6d82; }
-[data-testid="stMetric"] { box-shadow:none; border-radius:12px; }
-[data-testid="stExpander"] { background:#fff; border-radius:10px; }
-[data-testid="stExpander"] summary p { font-size:15px; }
-[data-testid="stMarkdownContainer"] p { font-size:16px; line-height:1.75; }
-[data-testid="stCaptionContainer"] p { font-size:14px; }
-.stTabs [data-baseweb="tab-list"] { gap:4px; overflow-x:auto; }
-.stTabs [data-baseweb="tab"] { font-size:15px; padding:12px 14px; white-space:nowrap; }
-.stTextInput input { min-height:46px; font-size:16px; background:#fff; }
-.stButton > button, .stFormSubmitButton > button { min-height:44px; border-radius:8px; }
-@media (max-width:640px) {
-  .block-container { padding-top:1.3rem; }
-  .planx-hero h1 { font-size:28px; }
-  .planx-card { min-height:100px; padding:14px; }
-  .planx-card-value { font-size:23px; }
-}
+.stTabs [data-baseweb="tab-list"] { gap:8px; overflow-x:auto; }
+.stTabs [data-baseweb="tab"] { white-space:nowrap; }
+.stDataFrame { border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.planx-brand { margin:8px 0 30px; padding-bottom:18px; border-bottom:1px solid var(--line); }
+.planx-brand-title { color:#89642d; font:700 32px/1 Georgia,serif; letter-spacing:-.06em; }
+.planx-brand-sub { margin-top:5px; color:#695946; font:700 9px Georgia,serif; letter-spacing:.22em; }
+.planx-hero { padding:15px 0 22px; margin-bottom:6px; }
+.planx-eyebrow { color:#9b753b; font-size:11px; font-weight:800; letter-spacing:.14em; margin-bottom:10px; }
+.planx-hero h1 { margin:0; font-size:32px; line-height:1.25; }
+.planx-hero p { color:#795f48; font-size:14px; margin:10px 0 0; }
+.planx-card { background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  min-height:105px; padding:16px 18px; }
+.planx-card-title { font-size:12px; font-weight:700; color:#736657; margin-bottom:8px; }
+.planx-card-value { font-size:22px; font-weight:750; color:var(--text); font-variant-numeric:tabular-nums; }
+.planx-card-note { margin-top:6px; font-size:11px; color:var(--muted); }
+.planx-empty { background:#fff; border:1px dashed #d9cbb8; border-radius:10px; padding:20px; color:#786b5c; }
+.planx-source { display:inline-flex; padding:4px 9px; border-radius:999px;
+  font-size:11px; background:#f8f4ed; border:1px solid var(--line); color:#786b5c; }
+.planx-status-ok { color:#176a4d; background:#eaf5ee; border-color:#c8e4d0; }
+.planx-status-wait { color:#866328; background:#fbf4e5; border-color:#ead9b5; }
+.planx-status-bad { color:#aa4242; background:#fff0ef; border-color:#efcdca; }
+hr { border-color:var(--line) !important; }
+@media(max-width:900px) { .block-container { padding:1rem 1rem 3rem; } .planx-hero h1 { font-size:27px; } }
 </style>
 """,
         unsafe_allow_html=True,
@@ -251,11 +88,8 @@ def brand():
     st.markdown(
         """
 <div class="planx-brand">
-  <div class="planx-brand-mark">↗</div>
-  <div>
-    <div class="planx-brand-title">StockDash</div>
-    <div class="planx-brand-sub">Data to Insight.</div>
-  </div>
+  <div class="planx-brand-title">PlanX</div>
+  <div class="planx-brand-sub">STOCK INTELLIGENCE</div>
 </div>
 """,
         unsafe_allow_html=True,
