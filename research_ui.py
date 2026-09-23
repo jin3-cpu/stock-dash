@@ -13,6 +13,11 @@ from chat_research import published, parse_bundle, trends, growth, request_text
 
 def render_research(store, state, sample_mode):
     theme()
+    market = st.columns(5)
+    for col, label in zip(market, ('KOSPI', 'KOSDAQ', 'USD/KRW', 'WTI', 'GOLD')):
+        with col:
+            card(label, '데이터 연결 필요', '시장 API 연결 후 표시')
+    st.caption('시장 수치를 임의로 표시하지 않습니다. 종목 자료는 각 카드의 기준일을 확인하세요.')
     hero('내 투자의 현재를 한눈에', '관심 있는 기업을 담고, 판단에 필요한 변화만 확인하세요.', 'PLANX · STOCK RESEARCH')
     if sample_mode:
         st.info('둘러보기 중입니다. 개인 목록을 저장하려면 먼저 대시보드 비밀번호를 설정하세요.')
@@ -81,6 +86,7 @@ def render_research(store, state, sample_mode):
                '적정주가 참고':f"{v['base']:,.0f}원" if v else '조사 필요',
                '일봉':trend['daily'], '주봉':trend['weekly'], '조사일':r.get('as_of','미조사')}
         rows.append(row);details[key]=(stock, r, trend, frame)
+    st.caption('시장  ›  산업  ›  기업  ›  투자판단')
     overview(details, st.session_state.get('account_snapshot'))
     with st.expander('전체 지표 비교'):
         st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
