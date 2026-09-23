@@ -100,6 +100,7 @@ def render_research(store, state, sample_mode):
     for p in st.session_state.get('account_snapshot', {}).get('positions', []):
         stocks[p['code']] = {**stocks.get(p['code'], {}), 'code':p['code'], 'name':p['name']}
     if not stocks:
+        _market_board({})
         if sample_mode:
             st.info('둘러보기 중입니다. 개인 목록을 저장하려면 먼저 대시보드 비밀번호를 설정하세요.')
         else:
