@@ -1,3 +1,4 @@
+# Streamlit Community Cloud deployment source: GitHub main / app.py
 [theme]
 base = "light"
 primaryColor = "#AE843C"
