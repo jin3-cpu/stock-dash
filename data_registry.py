@@ -104,6 +104,10 @@ def health(spec: ProviderSpec) -> dict:
             return _result(spec.provider_id, "error", f"응답코드 {code or '확인 필요'}", started)
 
         return _result(spec.provider_id, "unknown", "진단 미구현", started)
+    except requests.HTTPError as error:
+        status = error.response.status_code if error.response is not None else None
+        detail = f"HTTP {status} · 기관 응답 확인 필요" if status else "HTTP 응답 오류"
+        return _result(spec.provider_id, "error", detail, started)
     except requests.Timeout:
         return _result(spec.provider_id, "error", "응답 시간 초과", started)
     except requests.exceptions.SSLError:
