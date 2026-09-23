@@ -72,11 +72,11 @@ def _market_board(details):
         if len(details) > 7:
             st.caption(f'그 외 {len(details)-7}개 종목')
     with st.expander('API 연결 상태 확인'):
-        if st.button('실제 API 응답 확인', key='market_api_health'):
+        if st.button('실제 API 응답 확인', key='market_api_health_run'):
             from data_registry import health_all
             with st.spinner('공식 API 연결을 점검합니다…'):
-                st.session_state.market_api_health = health_all()
-        for item in st.session_state.get('market_api_health', []):
+                st.session_state.market_api_health_results = health_all()
+        for item in st.session_state.get('market_api_health_results', []):
             st.write(item['name'] + ' · ' + item['detail'] + ' · 확인 ' + item['checked_at'])
         st.caption('시장 지수·환율·섹터 API는 현재 진단 대상에 포함되지 않습니다.')
 
