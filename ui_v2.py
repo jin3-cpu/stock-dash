@@ -141,6 +141,14 @@ def hero(title: str, subtitle: str, eyebrow: str = "PLANX INVESTMENT OS"):
 
 
 def card(title: str, value: str, note: str = "", status: str = ""):
+    if title in {"KOSPI", "KOSDAQ", "USD/KRW", "WTI", "GOLD"} and value == "연결 대기":
+        from market_data import safe_market_snapshot
+
+        snapshot = safe_market_snapshot(title)
+        value = snapshot["value"]
+        note = snapshot["note"]
+        status = snapshot["status"]
+
     status_html = f'<div class="planx-card-note">{html.escape(status)}</div>' if status else ""
     st.markdown(
         f"""
