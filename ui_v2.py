@@ -35,6 +35,8 @@ section[data-testid="stSidebar"] > div { padding-top:1.3rem; }
 [data-testid="stSidebar"] .stRadio > label { display:none; }
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] { gap:.3rem; }
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label { border-radius:8px; padding:.68rem .6rem; }
+/* Legacy dedicated HBM page is no longer part of the primary PlanX navigation. */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] > label:nth-child(3) { display:none; }
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover { background:#f7efe1; }
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked) {
   background:var(--gold-soft); box-shadow:inset 3px 0 var(--gold); font-weight:700;
