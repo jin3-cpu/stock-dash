@@ -1,5 +1,6 @@
 # Streamlit Community Cloud deployment source: GitHub main / app.py
 # Approved dashboard scroll v4 redeploy trigger: 2026-09-29
+# Approved sidebar cleanup redeploy trigger: 2026-09-29
 [theme]
 base = "light"
 primaryColor = "#AE843C"
