@@ -1,5 +1,5 @@
 # Streamlit Community Cloud deployment source: GitHub main / app.py
-# Approved dashboard v3 redeploy trigger: 2026-09-23
+# Approved dashboard scroll v4 redeploy trigger: 2026-09-29
 [theme]
 base = "light"
 primaryColor = "#AE843C"
