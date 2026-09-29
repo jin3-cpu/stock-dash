@@ -225,7 +225,7 @@ def _next_indicator(financial, disclosures):
     return "다음 공식 실적 공시", "현재 자료에는 실적 추세를 이어서 판단할 충분한 비교 근거가 없습니다."
 
 
-def _journal(stock, research, financial, opportunities, risks, indicator):
+def _journal(stock, research, financial, opportunities, risks, indicator, edge_text):
     name = stock.get("name", "선택 기업")
     as_of = (research or {}).get("as_of") or (stock.get("report") or {}).get("fetched") or "기준일 확인 필요"
     facts = []
@@ -238,13 +238,14 @@ def _journal(stock, research, financial, opportunities, risks, indicator):
             facts.append(f"영업이익 전년 비교 {pg:+.1f}%")
     if not facts:
         facts.append("실적 비교 근거 추가 확인")
+    edge_label = edge_text if edge_text != "추가 확인" else "추가 확인(별도 근거가 있는 경우에만 확정)"
     return (
         f"[{name} 투자일지 초안]\n"
         f"기준일: {as_of}\n"
         f"현재 확인: {' · '.join(facts)}\n"
         f"성장 기회: {opportunities[0]['title']} / {opportunities[1]['title']}\n"
         f"확인할 위험: {risks[0]['title']} / {risks[1]['title']}\n"
-        f"경쟁력·엣지: 추가 확인(별도 근거가 있는 경우에만 확정)\n"
+        f"경쟁력·엣지: {edge_label}\n"
         f"다음 확인 지표: {indicator[0]}\n"
         "판단: 다음 확인 지표가 업데이트되기 전까지 기존 사실과 가정을 구분해 기록한다."
     )
@@ -253,7 +254,7 @@ def _journal(stock, research, financial, opportunities, risks, indicator):
 def _source_caption(date, source):
     st.caption("기준/날짜 · " + str(date or "확인 필요"))
     if source:
-        st.link_button("원문 근거", source)
+        st.markdown(f"[원문 근거]({source})")
     else:
         st.caption("원문 링크 · 추가 확인")
 
@@ -273,7 +274,7 @@ def render_verification_panel(store, state, sample_mode):
     opportunities, risks = _opportunities_and_risks(stock, research, financial, disclosures)
     edge_text, edge_source, edge_date = _edge(research)
     indicator = _next_indicator(financial, disclosures)
-    journal = _journal(stock, research, financial, opportunities, risks, indicator)
+    journal = _journal(stock, research, financial, opportunities, risks, indicator, edge_text)
 
     left, right = st.columns([1, 1], gap="large")
     with left, st.container(border=True):
@@ -286,9 +287,11 @@ def render_verification_panel(store, state, sample_mode):
         st.subheader("2. 실적 변화")
         if financial:
             unit = financial.get("unit", "")
+            revenue_change = _pct(financial.get("revenue"), financial.get("prior_revenue"))
+            profit_change = _pct(financial.get("profit"), financial.get("prior_profit"))
             rows = [
-                {"항목": "매출", "현재": financial.get("revenue"), "비교": financial.get("prior_revenue"), "변화": None if _pct(financial.get("revenue"), financial.get("prior_revenue")) is None else f"{_pct(financial.get('revenue'), financial.get('prior_revenue')):+.1f}%"},
-                {"항목": "영업이익", "현재": financial.get("profit"), "비교": financial.get("prior_profit"), "변화": None if _pct(financial.get("profit"), financial.get("prior_profit")) is None else f"{_pct(financial.get('profit'), financial.get('prior_profit')):+.1f}%"},
+                {"항목": "매출", "현재": financial.get("revenue"), "비교": financial.get("prior_revenue"), "변화": None if revenue_change is None else f"{revenue_change:+.1f}%"},
+                {"항목": "영업이익", "현재": financial.get("profit"), "비교": financial.get("prior_profit"), "변화": None if profit_change is None else f"{profit_change:+.1f}%"},
             ]
             st.dataframe(rows, hide_index=True, use_container_width=True)
             st.caption(f"{financial.get('period','')} / 비교 {financial.get('prior_period','')} · {financial.get('basis','')} · {unit}")
@@ -302,7 +305,7 @@ def render_verification_panel(store, state, sample_mode):
             for index, item in enumerate(disclosures[:5], start=1):
                 st.write(f"{index}. {item.get('date','')} · {item.get('title','제목 확인 필요')}")
                 if item.get("url"):
-                    st.link_button("공시 원문", item["url"], key=f"verify_disclosure_{selected}_{index}")
+                    st.markdown(f"[공시 원문]({item['url']})")
         else:
             st.info("현재 저장된 공식 공시가 없습니다. 공시가 없다는 확정 의미는 아닙니다.")
 
